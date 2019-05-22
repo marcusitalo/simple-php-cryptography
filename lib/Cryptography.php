@@ -63,37 +63,15 @@ class Cryptography{
 		return array_combine($keys, $values); 
 	}	
 	//Função recebe uma string converte string::base64 em seguida, fazer a troca das ocorrências chave : valor contidas em $privateKeys, retornando uma string criptografada;
-	protected function encrypt($string)
+	public function encrypt($string)
 	{		
 		$string = base64_encode($string);
 		return self::lastPartEncrypt(str_replace(array_keys(self::$privateKeys),array_values(self::$privateKeys),self::reverseString($string)));
 	}	
 	//Função recebe uma string criptografada, fazendo a troca das ocorrências valor : chave contidas em $privateKeys em seguida transforma a string::base64 em string, retornando-a ;
-	protected function decrypt($string)
+	public function decrypt($string)
 	{
 		$string = str_replace(array_values(self::$privateKeys),array_keys(self::$privateKeys),self::reverseString(self::firstPartDecrypt($string)));
 		return base64_decode($string);		
-	}
-	// Função para exibir implementação e retorno das funções;
-	public function showProcess($arrayPHP)
-	{
-		echo "<h5>Array PHP</h5>";
-		print_r($arrayPHP);
-		
-		$jsonObject = json_encode($arrayPHP);
-		echo "<h5>Json Object</h5>";
-		print_r($jsonObject);
-		
-		$encrypt = self::Encrypt($jsonObject);
-		echo "<h5>Criptografado</h5>";
-		print_r($encrypt);
-		
-		$decrypt = self::decrypt($encrypt);
-		echo "<h5>Descriptografado</h5>";
-		print_r($decrypt);
-				
-		$arrayPHP = json_decode($decrypt,TRUE);
-		echo "<h5>Array PHP</h5>";
-		print_r($arrayPHP);
 	}	
 }

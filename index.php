@@ -2,21 +2,40 @@
 
 include_once "lib/Cryptography.php";
 
-echo "<h3 style='background:gray;color:white;text-align:center;'>Default</h3>";
-$arrayPHP = array('nome'=>'Marcus Italo');
+$string = '… e a resposta para tal complexidade existencial é simplesmente “42”';
+
 $instance = new Cryptography();
-$instance->showProcess($arrayPHP);
+$stringEncrypt = $instance->encrypt($string);
+$stringDecrypt = $instance->decrypt($stringEncrypt);
+echo("String : ".$string."<br/>");
+echo("String Encrypt : ".$stringEncrypt."<br/>");
+echo("String Decrypt : ".$stringDecrypt."<br/><br/>");
+
+$arrayPHP = array('nome'=>'Marcus Italo','telefone'=>'(85) 987654321','email'=>'marcusitalo@email.com.br');
+$jsonObject = json_encode($arrayPHP);
+
+$stringEncrypt = $instance->encrypt($jsonObject);
+$stringDecrypt = $instance->decrypt($stringEncrypt);
+echo("Json : ".$jsonObject."<br/>");
+echo("Json Encrypt : ".$stringEncrypt."<br/>");
+echo("Json Decrypt : ".$stringDecrypt."<br/><br/>");
 
 unset($instance);
-
-echo "<h3 style='background:gray;color:white;text-align:center;'>Custom</h3>";
-//Chave menor do que a esperada
-
+//Chaves Personalizada 
 $newPublicKey = array("1","2","3","4","5","6","7","8","9");
-echo "<h5>Array Public Key Custom</h5>";
-print_r($newPublicKey);
+
 $instance = new Cryptography($newPublicKey);
-$instance->showProcess($arrayPHP);
+$stringEncrypt = $instance->encrypt($string);
+$stringDecrypt = $instance->decrypt($stringEncrypt);
+echo("String : ".$string."<br/>");
+echo("String Encrypt custom keys : ".$stringEncrypt."<br/>");
+echo("String Decrypt custom keys  : ".$stringDecrypt."<br/><br/>");
+
+$stringEncrypt = $instance->encrypt($jsonObject);
+$stringDecrypt = $instance->decrypt($stringEncrypt);
+echo("Json : ".$jsonObject."<br/>");
+echo("Json Encrypt custom keys : ".$stringEncrypt."<br/>");
+echo("Json Decrypt custom keys : ".$stringDecrypt."<br/><br/>");
 
 unset($instance);
-
+		

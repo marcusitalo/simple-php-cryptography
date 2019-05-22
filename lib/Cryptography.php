@@ -34,21 +34,21 @@ class Cryptography{
 		self::$privateKeys = self::combineArrayKeyValue();
 	}	
 	//Função para inverter a ordem dos caracteres da String	
-	public function reverseString($string)
+	private function reverseString($string)
 	{
 		return strrev($string);
 	}
 	//Função para remover par de iguais ("==") comum no final da criptografia em base 64
-	public function lastPartEncrypt($string)
+	private function lastPartEncrypt($string)
 	{
 		return str_replace("=","",$string);
 	}
 	//Função para inclusão de par de iguais ("==") para remontar a criptografia em base 64
-	public function firstPartDecrypt($string)
+	private function firstPartDecrypt($string)
 	{
 		return $string."==";
 	}
-	public function getPublicKeys()
+	private function getPublicKeys()
 	{
 		return $this->publicKeys;
 	}	
